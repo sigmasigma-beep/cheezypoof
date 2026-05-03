@@ -13,6 +13,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ─── Database helpers ───────────────────────────────────────────────
+// Ensure the data folder exists (Railway doesn't create it automatically)
+fs.mkdirSync(path.join(__dirname, 'data'), { recursive: true });
+
 function readDB() {
   if (!fs.existsSync(DB_PATH)) {
     const initial = {
